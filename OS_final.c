@@ -219,3 +219,121 @@ int main()
 		(Firs_Com_serv+Count_FF)->burst=0;
 		temp_FF++;
 	}
+	while(1)
+    { 
+      //ROUND ROBIN CODE START 
+      if(temp_RR<Count_RR||(Round___Robin+temp_RR-1)->burst!=0)
+	  {
+		printf("Round___Robin Queue Start  %d\n",Count_RR);
+		for(int i=1;i<=10;i++)
+		{
+			int quant=4;
+			if(ideal<(Round___Robin+temp_RR)->arrival)
+			{
+				printf("CPU IDLE\n");
+				t1++;
+				ideal++;
+				break;
+			}
+			else
+			{
+				ideal++;
+			}
+			if(temp_RR==Count_RR)
+            {
+            	break;
+            }
+            int d=(Round___Robin+temp_R)->burst;
+            while(1)
+            {
+            	if(d==0)
+            	{
+            		temp_R++;
+            		d=(Round___Robin+temp_R)->burst;
+            	}
+            	else
+            	{
+            		break;
+            	}
+            }
+			while(quant--)
+			{
+				   if((Round___Robin+temp_R)->burst>0)
+			       {
+				     (Round___Robin+temp_R)->burst-=1;
+				     t1++;
+				     t++;
+
+			       }
+			       if((Round___Robin+temp_R)->burst==0)
+			       {
+			         printf("Process P.ID Completed%d\n",(Round___Robin+temp_R)->p_id);
+			         turn_RR[temp_R]=t1-(Round___Robin+temp_R)->arrival;
+			         wait_RR[temp_R]=turn_RR[temp_R]-(Round___Robin+temp_R)->burstt;
+			         temp_RR++;
+			         break;
+			       }
+			       if(t==10)
+                   {
+                   	i=13;
+                   	break;
+                   }
+   			}
+			printf("%d\n", t1);
+			if((Round___Robin+temp_R)->burst!=0 && temp_R<Count_RR)
+		    {
+			printf("Process P%d Remaining Burst Time %d \n",temp_R+1,(Round___Robin+temp_R)->burst);
+		    }
+		    temp_R++;
+		    if(temp_R>=Count_RR)
+		    {
+		    	temp_R=0;
+		    }
+		}
+		printf("Round___Robin End\n");
+	  }
+	//ROUND ROBIN CODE END
+	 else
+	  {
+	  	x2=1;
+	  }
+	//PRIORITY QUEUE START
+     if(temp_PQ<Count_PR||(Priority_Queu+temp_PQ-1)->burst!=0)
+	  {
+		printf("Priority_Queu Queue Start\n");
+		for(int i=1;i<=10;i++)
+		{
+			if(ideal<(Priority_Queu+temp_PQ)->arrival)
+			{
+				printf("CPU IDLE\n");
+				t1++;
+				ideal++;
+				break;
+			}
+			else
+			{
+				ideal++;
+			}
+			if(temp_PQ==Count_PR)
+            {
+            	break;
+            }
+			if((Priority_Queu+temp_PQ)->burst>0)
+			{
+			 (Priority_Queu+temp_PQ)->burst-=1;
+			 t1++;
+			}
+			if((Priority_Queu+temp_PQ)->burst==0)
+			{
+			  printf("Process P.ID %d Completed\n",(Priority_Queu+temp_PQ)->p_id);
+			  turn_PQ[temp_PQ]=t1-(Priority_Queu+temp_PQ)->arrival;
+			  wait_PQ[temp_PQ]=turn_PQ[temp_PQ]-(Priority_Queu+temp_PQ)->burstt;
+			  temp_PQ++;
+			}
+		}
+		if((Priority_Queu+temp_PQ)->burst!=0 && temp_PQ<=Count_PR-1)
+		{
+			printf("Process P.ID %d Remaining Burst Time: %d \n",(Priority_Queu+temp_PQ)->p_id,(Priority_Queu+temp_PQ)->burst);
+		}
+		printf("Priority_Queu End\n");
+	  }
