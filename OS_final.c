@@ -337,3 +337,58 @@ int main()
 		}
 		printf("Priority_Queu End\n");
 	  }
+	  //QUEUE CODE START
+	  else
+	  {
+	  	x3=1;
+	  }
+	  //FCFSE CODE START
+	  if(temp_FF<Count_FF||(Firs_Com_serv+temp_FF-1)->burst!=0)
+      {
+    	printf("FCS Queue Start\n\n");
+		for(int i=1;i<=10;i++)
+		{
+			if(ideal<(Firs_Com_serv+temp_FF)->arrival)
+			{
+				printf("CPU IDLE\n");
+				t1++;
+				ideal++;
+				break;
+			}
+			else
+			{
+				ideal++;
+			}
+            if(temp_FF==Count_FF)
+            {
+            	break;
+            }
+			if((Firs_Com_serv+temp_FF)->burst>0)
+			 {
+			  (Firs_Com_serv+temp_FF)->burst-=1;
+			  t1++;
+			 }
+			if((Firs_Com_serv+temp_FF)->burst==0)
+			{
+			  printf("Process P.ID %d Completed.\n",(Firs_Com_serv+temp_FF)->p_id);
+			  turn_FF[temp_FF]=t1-(Firs_Com_serv+temp_FF)->arrival;
+			  wait_FF[temp_FF]=turn_FF[temp_FF]-(Firs_Com_serv+temp_FF)->burstt;
+			  temp_FF++;
+			}
+		}
+		if((Firs_Com_serv+temp_FF)->burst!=0 && temp_FF<=Count_FF-1)
+		{
+			printf("Process P.ID %d Remaining Burst Time: %d \n",(Firs_Com_serv+temp_FF)->p_id,(Firs_Com_serv+temp_FF)->burst);
+		}
+		printf("\nFCS Queue End\n\n");
+	  }
+	  //FCFS CODE END
+      else
+      {
+    	x1=1;
+      }
+	  if(x1==1 && x3==1 && x2==1)
+	  {
+	  	break;
+	  }
+    }
