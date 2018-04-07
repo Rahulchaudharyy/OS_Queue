@@ -392,3 +392,53 @@ int main()
 	  	break;
 	  }
     }
+    printf("%d\n", t1);
+float sum1=0,sum2=0,sum4=0,sum5=0,sum6=0,sum3=0;
+if(Count_FF>0)
+{
+   printf("\n\n");
+   printf("FCFS QUEUE\n\n");
+   printf("P.ID    PRIORITY    Burst_time    Arrival_time     Waiting_Time    TurnAround_Time\n\n");
+   for(int i=0;i<temp_FF;i++)
+   {
+	printf(" %d         %d         %d            %d             %d             %d\n",(Firs_Com_serv+i)->p_id,(Firs_Com_serv+i)->prior,(Firs_Com_serv+i)->burstt,(Firs_Com_serv+i)->arrival,wait_FF[i],turn_FF[i]);
+    sum1=sum1+wait_FF[i];
+    sum2=sum2+turn_FF[i];
+   }
+   printf("Average WAITING TIME : %f\n",(sum1)/(Count_FF));
+   printf("Average ARRIVAL TIME : %f",(sum2)/(Count_FF));
+}
+if(Count_PR>0)
+{
+  printf("\n\n");
+  printf("PRIORITY QUEUE\n\n");
+  printf("P.ID    PRIORITY    Burst_time    Arrival_time     Waiting_Time    TurnAround_Time\n\n");
+  for(int i=0;i<temp_PQ;i++)
+  {
+	printf(" %d         %d         %d            %d             %d             %d\n",(Priority_Queu+i)->p_id,(Priority_Queu+i)->prior,(Priority_Queu+i)->burstt,(Priority_Queu+i)->arrival,wait_PQ[i],turn_PQ[i]);
+    sum3=sum3+wait_PQ[i];
+    sum4=sum4+turn_PQ[i];
+  }
+  printf("Average WAITING TIME : %f\n",(sum3)/(Count_PR));
+  printf("Average ARRIVAL TIME : %f",(sum4)/(Count_PR));
+}
+if(Count_RR>0)
+{
+   printf("\n\n");
+   printf("Round___Robin QUEUE\n\n");
+   printf("P.ID    PRIORITY    Burst_time    Arrival_time     Waiting_Time    TurnAround_Time\n\n");
+   for(int i=0;i<temp_RR;i++)
+   {
+	 printf(" %d         %d         %d            %d             %d             %d\n",(Round___Robin+i)->p_id,(Round___Robin+i)->prior,(Round___Robin+i)->burstt,(Round___Robin+i)->arrival,wait_RR[i],turn_RR[i]);
+	 sum5=sum5+wait_RR[i];
+     sum6=sum6+turn_RR[i];
+   }
+   printf("Average WAITING TIME : %f\n",(sum5)/(Count_RR));
+   printf("Average ARRIVAL TIME : %f\n",(sum6)/(Count_RR));
+}
+printf("\n\n\n");
+printf("AVERAGE WAITING TIME AND TURNAROUND TIME OF EACH PROCESS OUTSIDE ALL QUEUES\n");
+printf("WAITING TIME : %f\n",(sum1+sum3+sum5)/(Count_RR+Count_FF+Count_PR));
+printf("TURNAROUND TIME : %f\n",(sum2+sum4+sum6)/(Count_RR+Count_FF+Count_PR));
+exit(0);
+}
